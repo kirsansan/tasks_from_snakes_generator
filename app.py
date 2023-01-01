@@ -15,7 +15,7 @@ def hello_world():  # put application's code here
 
 @app.route('/test')
 def hello_one_more_time():
-    return '<h1>Hello World!</h1>'
+    return '<h1>Hello World! Do you want to have some test? </h1>'
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000, debug=True)
