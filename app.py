@@ -1,3 +1,11 @@
+""" my project for learning python with flask
+    this is a simple project for solve tasks from task book
+    which was written by Gleb Kushedow (aka @kushedow aka t.me/kushedow)
+
+    this code written by Kirill.S (Mr.K)
+"""
+
+
 from flask import Flask, render_template, request, url_for
 from alphabet.alphabet_def import alphabet
 
