@@ -6,9 +6,10 @@
 """
 
 
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, abort
 from alphabet.alphabet_def import alphabet
 from utils.utils import prepare_menu
+from config.config import OFFSET_ON_PAGE
 
 app = Flask(__name__)
 
@@ -20,15 +21,19 @@ site_menu = [{"name": "Lesson 1", "url": "/lesson1"},
              {"name": "Lesson 4", "url": "/lesson4"},
              {"name": "Lesson 5", "url": "/lesson5"}]
 lesson1_menu = [{"name": "Hello", "url": "/user/Gleb"},
-                {"name": "Task 1 letter", "url": "/letter/y"},
-                {"name": "Task 2 find", "url": "/find/?letter=Q"},
-                {"name": "Task 3 check", "url": "/check/B/Bravo"},
-                {"name": "Task 4 between ", "url": "/between/?from=B&to=P"},
-                {"name": "Task 5 get-some ", "url": "/get-some/6"}]
+                {"name": "Task 1 /letter", "url": "/letter/y"},
+                {"name": "Task 2 /find", "url": "/find/?letter=Q"},
+                {"name": "Task 3 /check", "url": "/check/B/Bravo"},
+                {"name": "Task 4 /between/?from=<letter1>&to=<letter2> ", "url": "/between/?from=B&to=P"},
+                {"name": "Task 5 /get-some/<number> ", "url": "/get-some/6"},
+                {"name": "Task 6 /letters/?limit..  ", "url": "/letters/?limit=5&offset=2"},
+                {"name": "Task 7 /page/<number>  ", "url": "/letters/page/2"},
+                {"name": "Task 8 /search/?s=ch  ", "url": "/search/?s=ch"}]
+
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="ONE", menu=site_menu, submenu=lesson1_menu)
+    return render_template('index.html', title="Задачник", menu=site_menu, submenu=lesson1_menu)
 
 # def hello_world():  # put application's code here
 #     word = request.args.get('num')
@@ -98,8 +103,9 @@ def find_between():
         temp_str_for_answer = "-"
     return temp_str_for_answer
 
+
 @app.route('/get-some/<number_as_str>')
-def get_some_substring(number_as_str: str):
+def get_some_numbers(number_as_str: str):
         """Handler for /get-some/<number> """
         tmp_str_4_answer = ""
         counter = 0
@@ -114,6 +120,85 @@ def get_some_substring(number_as_str: str):
         if tmp_str_4_answer == "":
             tmp_str_4_answer = "-"
         return tmp_str_4_answer
+
+
+@app.route('/letters/')
+def get_some_slice():
+    """"Handler for / letters /?limit = < limit > & offset = < offset >
+    I need tell to Author about mistake with lower letters in his task-manual
+    """
+    limit = 26
+    if request.args.get('limit') and int(request.args.get('limit')) < 26 :
+        limit = int(request.args.get('limit'))
+    offset = 0
+    if request.args.get('offset') and int(request.args.get('offset')) > 0:
+        offset = int(request.args.get('offset'))
+    sort_direct = 1
+    if request.args.get('sort') == 'desc':
+        sort_direct = -1
+
+    # print(limit, offset,  sort_direct)
+    tmp_str_4_answer = ""
+    alphabet_list = list(alphabet)
+    if offset >= len(alphabet_list):
+        return "-"
+    if offset + limit >= len(alphabet_list):
+        limit = len(alphabet_list) - offset
+    if sort_direct < 0:
+        offset = len(alphabet) -1 - offset
+    # print(limit, offset, sort_direct, offset + (limit * sort_direct))
+    for i in range(offset, offset + (limit * sort_direct), sort_direct):
+        tmp_str_4_answer += alphabet_list[i]
+    return tmp_str_4_answer.lower()
+
+
+@app.route('/letters/page/<page_number_as_str>')
+def get_some_page(page_number_as_str):
+    """Handler for /letters/page/<page_number>
+    return string with 5 elements
+    :param page_number_as_str: number for start-page from 0
+    """
+    offset_on_page = OFFSET_ON_PAGE
+    page_number = int(page_number_as_str)
+    alphabet_list = list(alphabet)
+    if page_number * offset_on_page > len(alphabet_list):
+        abort(404)
+    if (page_number + 1) * offset_on_page > len(alphabet_list):
+        return "".join(alphabet_list[page_number * offset_on_page: len(alphabet_list)])
+    return "".join(alphabet_list[page_number * offset_on_page: (page_number + 1) * offset_on_page])
+
+
+@app.route('/search/')
+def search_substring_in_values():
+    """Handler for /search/?s=<s> 
+    take 's' substring as param for searching
+    :return: all words that include substring or 404 error if not found
+    """
+    substring = request.args.get('s')
+    tmp_str_4_answer = ""
+    for x in alphabet:
+        if substring.lower() in alphabet[x].lower():
+            tmp_str_4_answer += " " + alphabet[x]
+    if tmp_str_4_answer == "":
+        abort(404)
+    return tmp_str_4_answer
+
+
+@app.route('/get/')
+def search_substring_for_length():
+    """Handler for /get/?len=<length>
+    take 'len' as param for searching strings with length = len
+    :return: all words that length == len or 404 error if not found
+    """
+    length = int(request.args.get('len'))
+    tmp_str_4_answer = ""
+    for x in alphabet:
+        if len(alphabet[x]) == length:
+            tmp_str_4_answer += " " + alphabet[x]
+    if tmp_str_4_answer == "":
+        abort(404)
+    return tmp_str_4_answer
+
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000, debug=True)
