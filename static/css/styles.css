@@ -1,0 +1,58 @@
+html, body {
+    font-family: 'Arial';
+    margin: 0;
+    padding: 0;
+    heihgt: 1000%;
+    width: 100%;
+}
+
+a {
+    color: crimson;
+    text-decoration: none;
+}
+a:hover {
+    color: violet;
+    text-decoration: underline;
+}
+
+.clear {clear: both}
+
+ul.mainmenu {
+    list-style: none;
+    background: darkslategray;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    color: burlywood;
+    font-size: 20px;
+    overflow: hidden;
+}
+ul.mainmenu li{
+    float: left;
+    margin: 18px 40px 0 50px
+}
+ul.mainmenu li.last {float: right}
+
+ul.mainmenu li a{
+    color: gold;
+    text-decoration: none;
+}
+ul.mainmenu li a:hover {
+    color: indigo;
+}
+
+div.content {
+    margin: 10px;
+}
+
+.form-contact label {
+    display: inline-block;
+    min-width: 80px;
+}
+
+.form-contact p {margin: 10px 0 10px 0;}
+.form-contact input[type=submit], textarea {
+    font-size: 16px;
+}
+
+.flash {padding: 10px}

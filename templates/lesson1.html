@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ super() }}
+    <p>Список заданий первого урока
+        {% for m in submenu %}
+            <li><a href={{ m.url }}>{{ m.name }}</a></li>
+        {% endfor %}
+{% endblock %}
