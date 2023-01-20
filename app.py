@@ -8,19 +8,29 @@
 
 from flask import Flask, render_template, request, url_for
 from alphabet.alphabet_def import alphabet
+from utils.utils import prepare_menu
 
 app = Flask(__name__)
 
+site_menu: list = []
+prepare_menu(site_menu)
 
 @app.route('/')
-def hello_world():  # put application's code here
-    word = request.args.get('num')
-    num_out = '123'
-    return render_template(
-        'tttt1.html',
-        word=word,
-        num_out=num_out
-    )
+def index():
+    return render_template('base.html', title="ONE", menu=site_menu)
+
+# def hello_world():  # put application's code here
+#     word = request.args.get('num')
+#     num_out = '123'
+#     return render_template(
+#         'tttt1.html',
+#         word=word,
+#         num_out=num_out
+#     )
+
+@app.route('/about')
+def about():
+    return render_template('base.html', menu=site_menu)
 
 @app.route('/test')
 def hello_one_more_time():
