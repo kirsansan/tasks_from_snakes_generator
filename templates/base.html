@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     {% block title -%}
     {% if title %}
-        <title>funny lessons {{ title }}</title>
+        <title>funny lesson {{ title }}</title>
     {% else %}
-        <title>funny lessons {{ title }}</title>
+        <title>funny lessons</title>
     {% endif %}
     {% endblock %}
 </head>
@@ -23,9 +23,9 @@
 <div class="clear"></div>
     <div class="content">
     {% if title %}
-        <h1>funny lessons {{ title }}</h1>
+        <h1>{{ title }}</h1>
     {% else %}
-        <h1>funny lessons {{ title }}</h1>
+        <h1>funny lessons</h1>
     {% endif %}
 
 {% endblock %}
