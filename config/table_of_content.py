@@ -1,0 +1,30 @@
+""" constants for site's menu"""
+
+site_menu = [{"name": "Lesson 1", "url": "/lesson1"},
+             {"name": "Lesson 2", "url": "/lesson2"},
+             {"name": "Lesson 3", "url": "/lesson3"},
+             {"name": "Lesson 4", "url": "/lesson4"},
+             {"name": "Lesson 5", "url": "/lesson5"},
+             {"name": "About", "url": "/about"}]
+lesson1_menu = [{"name": "Часть 1 Легкие"},
+                {"name": "Hello", "url": "/user/Gleb"},
+                {"name": "Task 1 /letter/<letter>", "url": "/letter/y"},
+                {"name": "Task 2 /find/?letter=<letter>", "url": "/find/?letter=Q"},
+                {"name": "Task 3 /check/<letter>/<word>", "url": "/check/B/Bravo"},
+                {"name": "Task 4 /between/?from=<letter1>&to=<letter2> ", "url": "/between/?from=B&to=P"},
+                {"name": "Task 5 /get-some/<number> ", "url": "/get-some/6"},
+                {"name": "Task 6 /letters/?limit=<num1>&offset=<num2>  ", "url": "/letters/?limit=5&offset=2"},
+                {"name": "Task 7 /page/<number>  ", "url": "/letters/page/2"},
+                {"name": "Task 8 /search/?s=ch  ", "url": "/search/?s=ch"},
+                {"name": "Task 9 /get/?len=<length>  ", "url": "/get/?len=5"},
+                {"name": "Task 10 /letters/?limit=<num1>&offset=<num2>&sort=desc  ",
+                 "url": "/letters/?limit=5&offset=1&sort=desc"},
+                {"name": "Теперь посложнее пойдет "},
+                {"name": "Task 1* flights/?airport_1=<name>&airport_2=<name>",
+                 "url": "/flights/?airport_1=DMD&airport_2=HEL"},
+                {"name": "Task 2* /flights/between/<airport_1>&<airport_2>  ", "url": "/flights/between/DMD&HEL"},
+                {"name": "Task 3* /flights/from/<airport1>/to/<airport2>  ", "url": "/flights/from/DMD/to/HEL"},
+                {"name": "Task 4* /flights/from/<airport1>  ", "url": "/flights/from/VKo"},
+                {"name": "Task 5.1* /flights/with=<plane_1>...  ", "url": "/flights/with=Broomstick,A330,ballons,in_dreams"},
+                {"name": "Task 5.2* /flights/nowith=<plane_1>  ", "url": "/flights/nowith=A330"}]
+

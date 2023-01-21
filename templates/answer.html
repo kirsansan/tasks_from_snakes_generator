@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ super() }}
+    <p>my answer is:
+    {% for m in mytext %}
+        <p> {{ m }}</p>
+    {% endfor %}
+{% endblock %}

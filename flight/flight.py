@@ -11,7 +11,7 @@ class Flight:
     plane: str = ""
     from_: str = ""
     to: str = ""
-    departure_tile: str = ""
+    departure_time: str = ""
     arriving_time: str = ""
     seats: int = 0
     tickets_sold: int = 0
@@ -22,20 +22,18 @@ class Flight:
         self.plane: str = kwargs['plane']
         self.from_: str = kwargs['from']
         self.to: str = kwargs['to']
-        self.departure_tile: str = kwargs['departure_time']
+        self.departure_time: str = kwargs['departure_time']
         self.arriving_time: str = kwargs['arriving_time']
         self.seats: int = kwargs['seats']
         self.tickets_sold: int = kwargs['tickets_sold']
 
     def __repr__(self):
-        i_will_be_happy_tell_about_me: str = " ".join(["flight", self.number, "'",
-                                                       "from", self.from_, "'",
-                                                       "to", self.to, ";"])
-        return i_will_be_happy_tell_about_me
+        return " ".join([" flight", self.number, " from:", self.from_, " to:", self.to, ";"])
+        # return i_will_be_happy_tell_about_me
 
 
-class ManyFlights():
-    big_list_of_flights = []
+class ManyFlights:
+    big_list_of_flights: Flight = []
 
     def __init__(self):
         self.big_list_of_flights = []
