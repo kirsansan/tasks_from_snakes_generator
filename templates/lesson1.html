@@ -4,6 +4,10 @@
     {{ super() }}
     <p>Список заданий первого урока
         {% for m in submenu %}
-            <li><a href={{ m.url }}>{{ m.name }}</a></li>
+            {% if  m.url  %}
+                <li><a href={{ m.url }}>{{ m.name }}</a></li>
+            {% else %}
+                <li> {{ m.name }} </li>
+            {% endif %}
         {% endfor %}
 {% endblock %}

@@ -20,15 +20,21 @@ site_menu = [{"name": "Lesson 1", "url": "/lesson1"},
              {"name": "Lesson 3", "url": "/lesson3"},
              {"name": "Lesson 4", "url": "/lesson4"},
              {"name": "Lesson 5", "url": "/lesson5"}]
-lesson1_menu = [{"name": "Hello", "url": "/user/Gleb"},
-                {"name": "Task 1 /letter", "url": "/letter/y"},
-                {"name": "Task 2 /find", "url": "/find/?letter=Q"},
-                {"name": "Task 3 /check", "url": "/check/B/Bravo"},
+lesson1_menu = [{"name": "Легкие"},
+                {"name": "Hello", "url": "/user/Gleb"},
+                {"name": "Task 1 /letter/<letter>", "url": "/letter/y"},
+                {"name": "Task 2 /find/?letter=<letter>", "url": "/find/?letter=Q"},
+                {"name": "Task 3 /check/<letter>/<word>", "url": "/check/B/Bravo"},
                 {"name": "Task 4 /between/?from=<letter1>&to=<letter2> ", "url": "/between/?from=B&to=P"},
                 {"name": "Task 5 /get-some/<number> ", "url": "/get-some/6"},
-                {"name": "Task 6 /letters/?limit..  ", "url": "/letters/?limit=5&offset=2"},
+                {"name": "Task 6 /letters/?limit=<num1>&offset=<num2>  ", "url": "/letters/?limit=5&offset=2"},
                 {"name": "Task 7 /page/<number>  ", "url": "/letters/page/2"},
-                {"name": "Task 8 /search/?s=ch  ", "url": "/search/?s=ch"}]
+                {"name": "Task 8 /search/?s=ch  ", "url": "/search/?s=ch"},
+                {"name": "Task 9 //get/?len=<length>  ", "url": "/get/?len=5"},
+                {"name": "Task 10 /letters/?limit=<num1>&offset=<num2>&sort=desc  ",
+                 "url": "/letters/?limit=5&offset=1&sort=desc"},
+                {"name": "Теперь посложнее пойдет "},
+                {"name": "Hello", "url": "/user/Gleb"}]
 
 
 @app.route('/')
@@ -127,7 +133,7 @@ def get_some_slice():
     """"Handler for / letters /?limit = < limit > & offset = < offset >
     I need tell to Author about mistake with lower letters in his task-manual
     """
-    limit = 26
+    limit = len(alphabet)
     if request.args.get('limit') and int(request.args.get('limit')) < 26 :
         limit = int(request.args.get('limit'))
     offset = 0
@@ -198,6 +204,8 @@ def search_substring_for_length():
     if tmp_str_4_answer == "":
         abort(404)
     return tmp_str_4_answer
+
+
 
 
 if __name__ == '__main__':
