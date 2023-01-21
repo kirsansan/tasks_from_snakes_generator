@@ -1,0 +1,56 @@
+[
+	{
+		"number": "KLM4567",
+		"carrier": "KLM",
+		"plane": "B737",
+		"from": "DMD",
+		"to": "HEL",
+		"departure_time": "10:10",
+		"arriving_time": "12:15",
+		"seats": 115,
+		"tickets_sold": 110	
+  },
+	{
+		"number": "AFL123",
+		"carrier": "AFL",
+		"plane": "AN72",
+		"from": "SVO",
+		"to": "LED",
+		"departure_time": "14:14",
+		"arriving_time": "15:17",
+		"seats": 74,
+		"tickets_sold": 74	
+  },
+	{
+		"number": "TK419",
+		"carrier": "TK",
+		"plane": "A330",
+		"from": "VKO",
+		"to": "IST",
+		"departure_time": "07:30",
+		"arriving_time": "13:38",
+		"seats": 300,
+		"tickets_sold": 295	
+  },
+	{
+		"number": "AI118",
+		"carrier": "TK",
+		"plane": "B788",
+		"from": "BHX",
+		"to": "ATQ",
+		"departure_time": "10:10",
+		"arriving_time": "09:43",
+		"seats": 350,
+		"tickets_sold": 330	
+  },
+	{
+		"number": "JAL667",
+		"carrier": "JAL",
+		"plane": "A330",
+		"from": "DMD",
+		"to": "HEL",
+		"departure_time": "07:38",
+		"arriving_time": "09:38",
+		"seats": 270,
+		"tickets_sold": 270	
+  }]

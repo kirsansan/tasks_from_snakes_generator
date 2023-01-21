@@ -9,7 +9,10 @@
 from flask import Flask, render_template, request, url_for, abort
 from alphabet.alphabet_def import alphabet
 from utils.utils import prepare_menu
-from config.config import OFFSET_ON_PAGE
+from config.config import OFFSET_ON_PAGE, FILE_FLIGHTPLANS
+from jdata.utils import load_from_json_file
+from flight.flight import Flight
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -34,7 +37,8 @@ lesson1_menu = [{"name": "Легкие"},
                 {"name": "Task 10 /letters/?limit=<num1>&offset=<num2>&sort=desc  ",
                  "url": "/letters/?limit=5&offset=1&sort=desc"},
                 {"name": "Теперь посложнее пойдет "},
-                {"name": "Hello", "url": "/user/Gleb"}]
+                {"name": "Task 1* flights/?airport_1=<name>&airport_2=<name>",
+                 "url": "/flights/?airport_1=DMD&airport_2=HEL"}]
 
 
 @app.route('/')
@@ -205,7 +209,29 @@ def search_substring_for_length():
         abort(404)
     return tmp_str_4_answer
 
-
+@app.route('/flights/')
+def search_filghts_from_to():
+    """flights/?from=<airport_1>&to=<airport_2>"""
+    airport1 = request.args.get('airport_1')
+    airport2 = request.args.get('airport_2')
+    flights_list = []
+    data_ = load_from_json_file(FILE_FLIGHTPLANS)
+    # pprint(data_)
+    for one_item_flight_ in data_:
+        tmp_fpl_ = Flight(**one_item_flight_)
+        # print(tmp_fpl_)
+        flights_list.append(tmp_fpl_)
+    # print(flights_list)
+    # print(airport1, airport2)
+    prepare_answer_list = []
+    [prepare_answer_list.append(x) for x in flights_list if x.from_ == airport1 and x.to == airport2]
+    # print(prepare_answer_list)
+    str_4_out = f"<li>{airport1} > {airport2} </li>" + "<p>".join([(x.number + " " + x.departure_tile + " " + x.arriving_time)
+                                                      for x in prepare_answer_list])
+    if len(prepare_answer_list) == 0:
+        str_4_out += "<p> Не найдено"
+    # print(str_4_out)
+    return str_4_out
 
 
 if __name__ == '__main__':

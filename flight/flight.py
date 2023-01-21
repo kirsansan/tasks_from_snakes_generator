@@ -1,4 +1,5 @@
-""" class Flight """
+""" class Flight and ManyFlights """
+
 from jdata.utils import load_from_json_file
 from config.config import FILE_FLIGHTPLANS
 from pprint import pprint
