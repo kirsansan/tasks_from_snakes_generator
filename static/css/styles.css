@@ -34,7 +34,7 @@ ul.mainmenu li{
 ul.mainmenu li.last {float: right}
 
 ul.mainmenu li a{
-    color: gold;
+    color: peru;
     text-decoration: none;
 }
 ul.mainmenu li a:hover {

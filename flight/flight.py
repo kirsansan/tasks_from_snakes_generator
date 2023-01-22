@@ -17,7 +17,7 @@ class Flight:
     tickets_sold: int = 0
 
     def __init__(self, **kwargs):
-        self.number: str = kwargs['number']
+        self.number = kwargs['number']
         self.carrier: str = kwargs['carrier']
         self.plane: str = kwargs['plane']
         self.from_: str = kwargs['from']
@@ -33,7 +33,7 @@ class Flight:
 
 
 class ManyFlights:
-    big_list_of_flights: Flight = []
+    big_list_of_flights: list[Flight:] = []
 
     def __init__(self):
         self.big_list_of_flights = []

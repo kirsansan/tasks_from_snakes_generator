@@ -25,6 +25,6 @@ lesson1_menu = [{"name": "Часть 1 Легкие"},
                 {"name": "Task 2* /flights/between/<airport_1>&<airport_2>  ", "url": "/flights/between/DMD&HEL"},
                 {"name": "Task 3* /flights/from/<airport1>/to/<airport2>  ", "url": "/flights/from/DMD/to/HEL"},
                 {"name": "Task 4* /flights/from/<airport1>  ", "url": "/flights/from/VKo"},
-                {"name": "Task 5.1* /flights/with=<plane_1>...  ", "url": "/flights/with=Broomstick,A330,ballons,in_dreams"},
+                {"name": "Task 5.1* /flights/with=<plane_1>...  ",
+                 "url": "/flights/with=Broomstick,A330,ballons,in_dreams"},
                 {"name": "Task 5.2* /flights/nowith=<plane_1>  ", "url": "/flights/nowith=A330"}]
-

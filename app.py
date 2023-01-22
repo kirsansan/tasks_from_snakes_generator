@@ -17,9 +17,8 @@ from pprint import pprint
 
 app = Flask(__name__)
 
-# site_menu: list = []
-# prepare_menu(site_menu)
-
+# GLOBAL VARIABLES
+global_counter: int = 0
 
 def create_list_of_flights() -> list[Flight]:
     data_ = load_from_json_file(FILE_FLIGHTPLANS)
@@ -323,6 +322,23 @@ def search_for_no_planes(plane_3: str):
         str_4_out += "<p>Не найдено"
     # return str_4_out
     return render_template('answer.html', menu=site_menu, mytext=str_4_out.split('/'))
+
+
+@app.route('/testPOS', methods=['POST', 'GET'])
+def test_for_post():
+    if request.method == 'POST':
+        pprint(request.form)
+    print(request.form)
+    return render_template('answer.html', menu=site_menu, mytext=['test POS method'])
+
+@app.route('/poscounter', methods=['POST'])
+def post_counter():
+    if request.method == 'POST':
+        pprint(request.form)
+
+    global global_counter
+    global_counter += 1
+    return render_template('hello.html', menu=site_menu, hello=[f'magic variable = {global_counter}'])
 
 
 if __name__ == '__main__':
